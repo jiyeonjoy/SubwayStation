@@ -5,12 +5,12 @@
 //  Created by Jiyeon Choi on 2022. 12. 7..
 //
 
+import Alamofire
 import SnapKit
 import UIKit
 
 class StationSearchViewController: UIViewController {
-    
-    var numberOfCell = 0
+    private var stations: [Station] = []
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -26,6 +26,7 @@ class StationSearchViewController: UIViewController {
         
         setNavigationItems()
         setTableViewLayout()
+        requestStationName(from: "왕십리")
     }
     
     private func setNavigationItems() {
@@ -44,22 +45,39 @@ class StationSearchViewController: UIViewController {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
+    
+    private func requestStationName(from stationName: String) {
+        let urlString = "http://openapi.seoul.go.kr:8088/sample/json/SearchInfoBySubwayNameService/1/5/\(stationName)"
+        
+        AF
+            .request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") // 이거 해줘야지 한글이 들어가도(비영어!) 잘 됨.
+            .responseDecodable(of: StationResponseModel.self) { [weak self] response in
+                guard
+                    let self = self,
+                    case .success(let data) = response.result
+                else { return }
+                print(data)
+                self.stations = data.stations
+                self.tableView.reloadData()
+            }
+            .resume()
+    }
 }
 
 extension StationSearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        numberOfCell = 10
         tableView.reloadData()
         tableView.isHidden = false
         
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        numberOfCell = 0
         tableView.isHidden = true
+        stations = []
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        requestStationName(from: "왕십리역")
     }
 }
 
@@ -72,7 +90,7 @@ extension StationSearchViewController: UITableViewDelegate {
 
 extension StationSearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfCell
+        return stations.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

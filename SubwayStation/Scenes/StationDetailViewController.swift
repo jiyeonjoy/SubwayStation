@@ -5,11 +5,14 @@
 //  Created by Jiyeon Choi on 2023. 1. 10..
 //
 
+import Alamofire
 import SnapKit
 import UIKit
 
 final class StationDetailViewController: UIViewController {
-
+//    private let station: Station
+    private var realtimeArrivalList: [StationArrivalDatResponseModel.RealTimeArrival] = []
+    
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(fetchData), for: .valueChanged)
@@ -45,7 +48,22 @@ final class StationDetailViewController: UIViewController {
         fetchData()
     }
 
-    @objc private func fetchData() {}
+    @objc private func fetchData() {
+        let stationName = "왕십리역"
+        let urlString = "http://swopenapi.seoul.go.kr/api/subway/sample/json/realtimeStationArrival/0/5/\(stationName.replacingOccurrences(of: "역", with: ""))"
+
+        AF
+            .request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+            .responseDecodable(of: StationArrivalDatResponseModel.self) { [weak self] response in
+                self?.refreshControl.endRefreshing()
+
+                guard case .success(let data) = response.result else { return }
+                print(data)
+                self?.realtimeArrivalList = data.realtimeArrivalList
+                self?.collectionView.reloadData()
+            }
+            .resume()
+    }
 }
 
 extension StationDetailViewController: UICollectionViewDataSource {
@@ -58,6 +76,7 @@ extension StationDetailViewController: UICollectionViewDataSource {
             withReuseIdentifier: "StationDetailCollectionViewCell",
             for: indexPath
         ) as? StationDetailCollectionViewCell
+        
         cell?.setup()
         
         return cell ?? UICollectionViewCell()
