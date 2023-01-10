@@ -16,6 +16,8 @@
 		271B5D4129408D23006D0A89 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 271B5D4029408D23006D0A89 /* Alamofire */; };
 		27BD8D47296D42730045C39A /* StationDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BD8D46296D42730045C39A /* StationDetailCollectionViewCell.swift */; };
 		27BD8D49296D42C00045C39A /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BD8D48296D42C00045C39A /* StationDetailViewController.swift */; };
+		27BD8D4B296D46030045C39A /* StationArrivalDateResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BD8D4A296D46030045C39A /* StationArrivalDateResponseModel.swift */; };
+		27BD8D4D296D46310045C39A /* StationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BD8D4C296D46310045C39A /* StationResponseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		271B5D3629408C13006D0A89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27BD8D46296D42730045C39A /* StationDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		27BD8D48296D42C00045C39A /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
+		27BD8D4A296D46030045C39A /* StationArrivalDateResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationArrivalDateResponseModel.swift; sourceTree = "<group>"; };
+		27BD8D4C296D46310045C39A /* StationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationResponseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 			children = (
 				271B5D2829408C13006D0A89 /* AppDelegate.swift */,
 				271B5D2A29408C13006D0A89 /* SceneDelegate.swift */,
+				27BD8D4C296D46310045C39A /* StationResponseModel.swift */,
+				27BD8D4A296D46030045C39A /* StationArrivalDateResponseModel.swift */,
 				27BD8D43296D3D1E0045C39A /* Scenes */,
 				271B5D3129408C13006D0A89 /* Assets.xcassets */,
 				271B5D3329408C13006D0A89 /* LaunchScreen.storyboard */,
@@ -163,7 +169,9 @@
 				27BD8D47296D42730045C39A /* StationDetailCollectionViewCell.swift in Sources */,
 				271B5D2D29408C13006D0A89 /* StationSearchViewController.swift in Sources */,
 				271B5D2929408C13006D0A89 /* AppDelegate.swift in Sources */,
+				27BD8D4B296D46030045C39A /* StationArrivalDateResponseModel.swift in Sources */,
 				271B5D2B29408C13006D0A89 /* SceneDelegate.swift in Sources */,
+				27BD8D4D296D46310045C39A /* StationResponseModel.swift in Sources */,
 				27BD8D49296D42C00045C39A /* StationDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
