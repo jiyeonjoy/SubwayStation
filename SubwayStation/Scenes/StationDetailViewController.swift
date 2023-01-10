@@ -68,8 +68,9 @@ final class StationDetailViewController: UIViewController {
 
         AF
             .request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+        // 클로저 안에서 self 쓰면 메모리 해제가 안될 수 있어 앱이 죽을 수 있기 때문에 꼭 [weak self] 해줘야 됨!!
             .responseDecodable(of: StationArrivalDatResponseModel.self) { [weak self] response in
-                self?.refreshControl.endRefreshing()
+                self?.refreshControl.endRefreshing() // 리프레시가 시작해야지만 멈추는거 ! 따라서 예외처리 안해줘도 됨.
 
                 guard case .success(let data) = response.result else { return }
                 print(data)
