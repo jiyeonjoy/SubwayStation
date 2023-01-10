@@ -1,5 +1,5 @@
 //
-//  StationArrivalDateResponseModel.swift
+//  StationArrivalDatResponseModel.swift
 //  SubwayStation
 //
 //  Created by Jiyeon Choi on 2023. 1. 10..
