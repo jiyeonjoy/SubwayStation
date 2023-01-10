@@ -26,7 +26,6 @@ class StationSearchViewController: UIViewController {
         
         setNavigationItems()
         setTableViewLayout()
-        requestStationName(from: "왕십리")
     }
     
     private func setNavigationItems() {
@@ -48,6 +47,7 @@ class StationSearchViewController: UIViewController {
     
     private func requestStationName(from stationName: String) {
         let urlString = "http://openapi.seoul.go.kr:8088/sample/json/SearchInfoBySubwayNameService/1/5/\(stationName)"
+        print(urlString)
         
         AF
             .request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") // 이거 해줘야지 한글이 들어가도(비영어!) 잘 됨.
@@ -68,7 +68,6 @@ extension StationSearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         tableView.reloadData()
         tableView.isHidden = false
-        
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -77,13 +76,14 @@ extension StationSearchViewController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        requestStationName(from: "왕십리역")
+        requestStationName(from: searchText)
     }
 }
 
 extension StationSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = StationDetailViewController()
+        let station = stations[indexPath.row]
+        let vc = StationDetailViewController(station: station)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -95,8 +95,9 @@ extension StationSearchViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
-        cell.textLabel?.text = "왕십리역"
-        cell.detailTextLabel?.text = "디테일텍스트"
+        let station = stations[indexPath.row]
+        cell.textLabel?.text = station.stationName
+        cell.detailTextLabel?.text = station.lineNumber
 
         return cell
     }

@@ -82,8 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				271B5D2C29408C13006D0A89 /* StationSearchViewController.swift */,
-				27BD8D46296D42730045C39A /* StationDetailCollectionViewCell.swift */,
 				27BD8D48296D42C00045C39A /* StationDetailViewController.swift */,
+				27BD8D46296D42730045C39A /* StationDetailCollectionViewCell.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
